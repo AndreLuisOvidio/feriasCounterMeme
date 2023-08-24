@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem regressiva!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #121212, #222);
+            color: #a567e5;
+            font-size: 3em; 
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            height: 100vh;   
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            animation: fadeIn 1.5s ease-out forwards;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="message"></div>
+
+    <script>
+        function atualizaParaFerias() {
+            const dataAtual = new Date();
+            const inicioFerias = new Date(2023, 7, 4, 18, 18); // Lembrando que em JavaScript, os meses começam de 0
+            const fimFerias = new Date(2023, 8, 25, 8, 0); // Lembrando que em JavaScript, os meses começam de 0
+    
+            const diferencaoInicio = inicioFerias - dataAtual;
+            const diferencaoFim = fimFerias - dataAtual;
+
+            let message;
+            if(diferencaoInicio > 0) {
+                let difference = diferencaoInicio;
+                const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hoursDifference = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutesDifference = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const secondsDifference = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                message = `Faltam ${daysDifference} dias, ${hoursDifference} horas, ${minutesDifference} minutos e ${secondsDifference} segundos até as Ferias do Ovidio ^^`;
+            }
+            
+            if(!message && diferencaoFim > 0){
+                let difference = diferencaoFim;
+                const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hoursDifference = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutesDifference = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const secondsDifference = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                message = `Faltam ${daysDifference} dias, ${hoursDifference} horas, ${minutesDifference} minutos e ${secondsDifference} segundos até a volta do Ovidio ^^`;
+            }
+            if(!message) {
+                message = 'Na a informar sobre o Ovidio ^^'
+            }
+            
+            // Mostrando a mensagem no div
+            document.getElementById('message').textContent = message;
+            setTimeout(atualizaParaFerias, 100);
+        }
+        atualizaParaFerias()
+    </script>
+</body>
+</html>
