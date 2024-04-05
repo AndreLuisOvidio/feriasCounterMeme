@@ -1,68 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Contagem Regressiva</title>
-<style>
-    body {
-        background: linear-gradient(#e66465, #9198e5);
-        color: #ccc;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .container {
-        text-align: center;
-    }
-    .mensagem {
-        font-size: 24px;
-    }
-    .countdown {
-        font-size: 40px;
-        font-weight: bold;
-    }
-    .tema{
-        font-weight: bold;
-    }
-</style>
+    <title>Convite para Chope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        .invite-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .invite-header {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .invite-body {
+            color: #666666;
+            margin-bottom: 20px;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="mensagem">
-        <h2>Teremos descontração hoje ^^</h2>
+    <div class="invite-container">
+        <h1 class="invite-header">Que tal um Chope?</h1>
+        <p class="invite-body">Como não tivemos aquele momento de descontração hoje, que tal irmos tomar um chope depois do trabalho? Seria uma ótima maneira de relaxar e conversar um pouco.</p>
+        <a class="action-button">Responder no Slack</a>
     </div>
-    <div class="tema">
-        <h4>Tema sugerido ChatGPT:</h4>
-        <h2>Se você pudesse ter um superpoder por um dia, qual escolheria e por quê?</h2>
-    </div>
-    <div id="countdown" class="countdown"></div>
-</div>
-
-<script>
-function atualizarContagemRegressiva() {
-    const dataFinal = new Date("March 22, 2024 17:00:00").getTime();
-    const agora = new Date().getTime();
-    const diferenca = dataFinal - agora;
-
-    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown").innerHTML = dias + "d " + horas + "h "
-    + minutos + "m " + segundos + "s ";
-
-    if (diferenca < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerHTML = "A hora chegou!";
-    }
-}
-
-atualizarContagemRegressiva();
-const x = setInterval(atualizarContagemRegressiva, 1000);
-</script>
 </body>
 </html>
