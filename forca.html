@@ -55,6 +55,12 @@
         #letrasUsadas {
             text-transform: uppercase; /* Texto em maiúsculas */
         }
+        #forcaImagem {
+            font-size: 24px;
+            line-height: 1.5;
+            white-space: pre;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +81,7 @@
             <p>Letras Usadas: <span id="letrasUsadas"></span></p>
             <input type="text" id="entrada" placeholder="Digite uma letra" oninput="this.value = this.value.toUpperCase()">
             <button onclick="tentarLetra()">Tentar Letra</button>
+            <p id="forcaImagem"></p>
             <p id="forca"></p>
             <button onclick="reiniciarJogo()">Iniciar Novo Jogo</button>
         </div>
@@ -85,6 +92,15 @@
         let estadoPalavra = [];
         let chances = 6;
         let tentativas = new Set();
+        const imagensForca = [
+            "",
+            " O ",
+            " O\n/",
+            " O\n/|",
+            " O\n/|\\",
+            " O\n/|\\\n/",
+            " O\n/|\\\n/ \\"
+        ];
 
         document.getElementById('palavraSecreta').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
@@ -96,69 +112,68 @@
             if (event.key === 'Enter' && this.value.trim() !== '') {
                 tentarLetra();
             }
-        });
-
-        function iniciarJogo() {
-            palavraSecreta = document.getElementById('palavraSecreta').value.toUpperCase();
-            chances = parseInt(document.getElementById('limiteTentativas').value, 10) || Infinity;
-            if (palavraSecreta) {
-                resetJogo();
-                document.getElementById('jogo').style.display = 'block';
-                document.getElementById('configuracao').style.display = 'none';
-            }
-        }
-
-        function tentarLetra() {
-            const entrada = document.getElementById('entrada');
-            let letra = entrada.value.toUpperCase();
-            entrada.value = ''; // Limpar campo de entrada
-
-            if (letra && !tentativas.has(letra)) {
-                tentativas.add(letra);
-                document.getElementById('letrasUsadas').textContent = [...tentativas].join(', ');
-
-                if (palavraSecreta.includes(letra)) {
-                    // Atualiza o estado da palavra
-                    for (let i = 0; i < palavraSecreta.length; i++) {
-                        if (palavraSecreta[i] === letra) {
-                            estadoPalavra[i] = letra;
-                        }
-                    }
-                } else {
-                    if (chances !== Infinity) {
-                        chances--;
-                    }
-                }
-                
-                atualizarDisplay();
-            }
-        }
-
-        function reiniciarJogo() {
-            document.getElementById('configuracao').style.display = 'block';
-            document.getElementById('jogo').style.display = 'none';
-            document.getElementById('palavraSecreta').value = '';
-            document.getElementById('limiteTentativas').value = 6; // Reset para o default
+});function iniciarJogo() {
+        palavraSecreta = document.getElementById('palavraSecreta').value.toUpperCase();
+        chances = parseInt(document.getElementById('limiteTentativas').value, 10) || Infinity;
+        if (palavraSecreta) {
             resetJogo();
+            document.getElementById('jogo').style.display = 'block';
+            document.getElementById('configuracao').style.display = 'none';
         }
+    }
 
-        function resetJogo() {
-            tentativas.clear();
-            estadoPalavra = Array(palavraSecreta.length).fill('_');
-            atualizarDisplay();
-        }
+    function tentarLetra() {
+        const entrada = document.getElementById('entrada');
+        let letra = entrada.value.toUpperCase();
+        entrada.value = ''; // Limpar campo de entrada
 
-        function atualizarDisplay() {
-            document.getElementById('palavra').textContent = estadoPalavra.join(' ');
-            document.getElementById('chances').textContent = (chances === Infinity ? 'Ilimitado' : chances);
+        if (letra && !tentativas.has(letra)) {
+            tentativas.add(letra);
             document.getElementById('letrasUsadas').textContent = [...tentativas].join(', ');
 
-            if (!estadoPalavra.includes('_')) {
-                document.getElementById('forca').textContent = "Parabéns! Você acertou a palavra!";
-            } else if (chances === 0) {
-                document.getElementById('forca').textContent = "Fim de jogo! A palavra era: " + palavraSecreta;
+            if (palavraSecreta.includes(letra)) {
+                // Atualiza o estado da palavra
+                for (let i = 0; i < palavraSecreta.length; i++) {
+                    if (palavraSecreta[i] === letra) {
+                        estadoPalavra[i] = letra;
+                    }
+                }
+            } else {
+                if (chances !== Infinity) {
+                    chances--;
+                }
+                document.getElementById('forcaImagem').textContent = imagensForca[6 - chances];
             }
+            
+            atualizarDisplay();
         }
-    </script>
-</body>
-</html>
+    }
+
+    function reiniciarJogo() {
+        document.getElementById('configuracao').style.display = 'block';
+        document.getElementById('jogo').style.display = 'none';
+        document.getElementById('palavraSecreta').value = '';
+        document.getElementById('limiteTentativas').value = 6; // Reset para o default
+        resetJogo();
+    }
+
+    function resetJogo() {
+        tentativas.clear();
+        estadoPalavra = Array(palavraSecreta.length).fill('_');
+        document.getElementById('forcaImagem').textContent = imagensForca[0];
+        atualizarDisplay();
+    }
+
+    function atualizarDisplay() {
+        document.getElementById('palavra').textContent = estadoPalavra.join(' ');
+        document.getElementById('chances').textContent = (chances === Infinity ? 'Ilimitado' : chances);
+        document.getElementById('letrasUsadas').textContent = [...tentativas].join(', ');
+
+        if (!estadoPalavra.includes('_')) {
+            document.getElementById('forca').textContent = "Parabéns! Você acertou a palavra!";
+        } else if (chances === 0) {
+            document.getElementById('forca').textContent = "Fim de jogo! A palavra era: " + palavraSecreta;
+            document.getElementById('forcaImagem').textContent = imagensForca[6];
+        }
+    }
+</script>
