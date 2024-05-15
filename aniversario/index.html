@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite de Aniversário</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+</head>
+<body onload="prettyPrint()">
+    <div class="container">
+        <pre class="code-block prettyprint lang-java">
+public class Aniversario {
+    public static void main(String[] args) {
+        Aniversario convite = new Aniversario();
+        convite.detalhes();
+    }
+
+    public void detalhes() {
+        String data = "31 de Maio de 2024";
+        String hora = "19:00";
+        String local = "Minha Casa, Rua Hans Sattler, 75";
+        String mensagem = "Você está convidado para o meu aniversário!";
+
+        System.out.println("Data: " + data);
+        System.out.println("Hora: " + hora);
+        System.out.println("Local: " + local);
+        System.out.println(mensagem);
+    }
+}
+        </pre>
+        <div style="width: 80%; margin: 0 auto;">
+            <button onclick="executeCode()">Executar</button>
+        </div>
+    </div>
+    <div id="terminal" class="terminal hidden">
+        <div class="terminal-header">
+            <span>Terminal</span>
+            <button onclick="closeTerminal()">X</button>
+        </div>
+        <pre class="terminal-content" id="terminal-content"></pre>
+        <button class="accept-button" onclick="acceptInvitation()">Aceitar Convite</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
