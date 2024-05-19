@@ -1,0 +1,222 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: 
+        linear-gradient(90deg, transparent 9.5mm, rgba(0, 0, 0, 0.01) 9.5mm, rgba(0, 0, 0, 0.01) 1cm),
+        linear-gradient(transparent 9.5mm, rgba(0, 0, 0, 0.01) 9.5mm, rgba(0, 0, 0, 0.01) 1cm);
+    background-size: 1cm 1cm;
+}
+
+
+.linha {
+    /* Borda preta */
+    /* border: 1px solid black;
+    box-sizing: border-box; */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.caixa {
+    /* Borda preta */
+    border: 5px solid black;
+    margin: 1cm;
+    text-align: center;
+    padding: 1cm;
+    padding-left: 0px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.bolinha {
+    height: 100%;
+    /* width: 10px; */
+    display: flex;
+    width: 1cm;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.b-azul {
+    height: 100%;
+    width: 5px;
+    margin-left: 5px;
+    background-color: blue;
+}
+
+.roxo {
+    border: 5px solid purple;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.t {
+    border-top: 10px solid green;
+}
+
+.e {
+    border-left: 10px solid green;
+}
+
+.d {
+    border-right: 10px solid green;
+}
+
+.b {
+    border-bottom: 10px solid green;
+}   
+
+.a2 {
+    /* Altura 2 */
+    height: 2cm;
+    max-height: 2cm;
+    min-height: 2cm;
+}
+
+.a3 {
+    /* Altura 3 */
+    height: 3cm;
+    max-height: 3cm;
+    min-height: 3cm;
+}
+
+.a4 {
+    /* Altura 4 */
+    height: 4cm;
+    max-height: 4cm;
+    min-height: 4cm;
+}
+
+.a5 {
+    /* Altura 5 */
+    height: 5cm;
+    max-height: 5cm;
+    min-height: 5cm;
+}
+
+.a6 {
+    /* Altura 6 */
+    height: 6cm;
+    max-height: 6cm;
+    min-height: 6cm;
+}
+
+.a7 {
+    /* Altura 7 */
+    height: 7cm;
+    max-height: 7cm;
+    min-height: 7cm;
+}
+
+.a8 {
+    /* Altura 8 */
+    height: 8cm;
+    max-height: 8cm;
+    min-height: 8cm;
+}
+
+.a10 {
+    /* Altura 10 */
+    height: 10cm;
+    max-height: 10cm;
+    min-height: 10cm;
+}
+
+.a12 {
+    /* Altura 12 */
+    height: 12cm;
+    max-height: 12cm;
+    min-height: 12cm;
+}
+
+.l2 {
+    /* Largura 2 */
+    width: 2cm;
+    max-width: 2cm;
+    min-width: 2cm;
+}
+
+.l3 {
+    /* Largura 3 */
+    width: 3cm;
+    max-width: 3cm;
+    min-width: 3cm;
+}
+
+.l5 {
+    /* Largura 5 */
+    width: 5cm;
+    max-width: 5cm;
+    min-width: 5cm;
+}
+
+.l6 {
+    /* Largura 6 */
+    width: 6cm;
+    max-width: 6cm;
+    min-width: 6cm;
+}
+
+.l7 {
+    /* Largura 7 */
+    width: 7cm;
+    max-width: 7cm;
+    min-width: 7cm;
+}
+
+.l8 {
+    /* Largura 8 */
+    width: 8cm;
+    max-width: 8cm;
+    min-width: 8cm;
+}
+
+.l9 {
+    /* Largura 9 */
+    width: 9cm;
+    max-width: 9cm;
+    min-width: 9cm;
+}
+
+.l10 {
+    /* Largura 10 */
+    width: 10cm;
+    max-width: 10cm;
+    min-width: 10cm;
+}
+
+.l11 {
+    /* Largura 11 */
+    width: 11cm;
+    max-width: 11cm;
+    min-width: 11cm;
+}
+
+.l14 {
+    /* Largura 14 */
+    width: 14cm;
+    max-width: 14cm;
+    min-width: 14cm;
+}
+
+.l16_5 {
+    /* Largura 16.5 */
+    width: 16.5cm;
+    max-width: 16.5cm;
+    min-width: 16.5cm;
+}
+
+.l17 {
+    /* Largura 17 */
+    width: 17cm;
+    max-width: 17cm;
+    min-width: 17cm;
+}
