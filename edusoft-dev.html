@@ -36,7 +36,17 @@
 
   .estacao {
     height: 50px; /* Ajuste conforme necessário */
+    position: relative; /* Permite posicionar os filhos absolutamente dentro dela */
+    font-size: 24px; /* Tamanho da fonte para "Saymon" */
   }
+
+  .numero {
+    position: absolute; /* Posicionamento absoluto dentro da div "estacao" */
+    bottom: 0; /* Alinha na parte inferior da div */
+    right: 0; /* Alinha à direita da div */
+    font-size: 12px; /* Tamanho da fonte menor para o número */
+  }
+
 
   /* Estilo de destaque */
   .destaque {
@@ -124,6 +134,14 @@ function destacarEstacao() {
       estacaoParaDestacar.classList.add('destaque');
     }
   }
+  
+}
+const estacoes = document.getElementsByClassName('estacao')
+for (let i=0; i<estacoes.length; i++) {
+    let divNumero = document.createElement('div');
+    divNumero.append(i+1);
+    divNumero.classList.add('numero')
+    estacoes[i].appendChild(divNumero)
 }
 
 // Chama a função quando a página carrega
