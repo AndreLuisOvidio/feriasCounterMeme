@@ -62,56 +62,116 @@
 
     <!-- Linha 1 com Estações -->
     <div class="linha-estacao">
-      <div class="estacao">Saymon</div>
-      <div class="estacao">Leandro</div>
-      <div class="estacao">Vanessa</div>
-      <div class="estacao">Rosana</div>
-      <div class="estacao">Felipe K.</div>
-      <div class="estacao">Fabio</div>
+      <a>
+        <div class="estacao">Saymon</div>
+      </a>
+      <a>
+        <div class="estacao">Leandro</div>
+      </a>
+      <a>
+        <div class="estacao">Vanessa</div>
+      </a>
+      <a>
+        <div class="estacao">Rosana</div>
+      </a>
+      <a>
+        <div class="estacao">Felipe K.</div>
+      </a>
+      <a>
+        <div class="estacao">Fabio</div>
+      </a>
     </div>
   
     <div class="linha-estacao"></div> <!-- Linha 2 sem Estações -->
   
     <!-- Linha 3 com Estações -->
     <div class="linha-estacao">
-      <div class="estacao">Madona</div>
-      <div class="estacao">Dani</div>
-      <div class="estacao">Cailane</div>
-      <div class="estacao">Bianca</div>
-      <div class="estacao">Paulo</div>
-      <div class="estacao">---</div>
+      <a>
+        <div class="estacao">Madona</div>
+      </a>
+      <a>
+        <div class="estacao">Dani</div>
+      </a>
+      <a>
+        <div class="estacao">Cailane</div>
+      </a>
+      <a>
+        <div class="estacao">Bianca</div>
+      </a>
+      <a>
+        <div class="estacao">Paulo</div>
+      </a>
+      <a>
+        <div class="estacao">---</div>
+      </a>
     </div>
   
     <!-- Linha 4 com Estações -->
     <div class="linha-estacao">
-      <div class="estacao">Mateus</div>
-      <div class="estacao">Andrey</div>
-      <div class="estacao">Michel</div>
-      <div class="estacao">Ovidio</div>
-      <div class="estacao">Schappo</div>
-      <div class="estacao">Felipe F.</div>
+      <a>
+        <div class="estacao">Mateus</div>
+      </a>
+      <a>
+        <div class="estacao">Andrey</div>
+      </a>
+      <a>
+        <div class="estacao">Michel</div>
+      </a>
+      <a>
+        <div class="estacao">Ovidio</div>
+      </a>
+      <a>
+        <div class="estacao">Schappo</div>
+      </a>
+      <a>
+        <div class="estacao">Felipe F.</div>
+      </a>
     </div>
   
     <div class="linha-estacao"></div> <!-- Linha 5 sem Estações -->
   
     <!-- Linha 6 com Estações -->
     <div class="linha-estacao">
-      <div class="estacao">Luiz Debatin</div>
-      <div class="estacao">Wellington</div>
-      <div class="estacao">Adrian</div>
-      <div class="estacao">Lucas</div>
-      <div class="estacao">Rogério</div>
-      <div class="estacao">Breno</div>
+      <a>
+        <div class="estacao">Luiz Debatin</div>
+      </a>
+      <a>
+        <div class="estacao">Wellington</div>
+      </a>
+      <a>
+        <div class="estacao">Adrian</div>
+      </a>
+      <a>
+        <div class="estacao">Lucas</div>
+      </a>
+      <a>
+        <div class="estacao">Rogério</div>
+      </a>
+      <a>
+        <div class="estacao">Breno</div>
+      </a>
     </div>
   
     <!-- Linha 7 com Estações -->
     <div class="linha-estacao">
-      <div class="estacao">Laura</div>
-      <div class="estacao">Lenzi</div>
-      <div class="estacao">Itai</div>
-      <div class="estacao">---</div>
-      <div class="estacao">---</div>
-      <div class="estacao">Ruan</div>
+      <a>
+        <div class="estacao">Laura</div>
+      </a>
+      <a>
+        <div class="estacao">Lenzi</div>
+      </a>
+      <a>
+        <div class="estacao">Itai</div>
+      </a>
+      <a>
+        <div class="estacao">---</div>
+      </a>
+      <a>
+        <div class="estacao">---</div>
+      </a>
+      <a>
+        <div class="estacao">Ruan</div>
+      </a>
     </div>
   
     <div class="porta">Porta</div>
@@ -142,6 +202,7 @@ for (let i=0; i<estacoes.length; i++) {
     divNumero.append(i+1);
     divNumero.classList.add('numero')
     estacoes[i].appendChild(divNumero)
+    estacoes[i].parentElement.href='https://ovidio.dev/edusoft-dev.html?estacao='+(i+1)
 }
 
 // Chama a função quando a página carrega
