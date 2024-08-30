@@ -1,77 +1,76 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contagem regressiva!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <title>Contagem Regressiva - Férias do Ovidio</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #121212, #222);
-            color: #a567e5;
-            font-size: 3em; 
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center; 
-            align-items: center;     
-            height: 100vh;   
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            color: white;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+        .container {
+            text-align: center;
         }
-
-        body {
-            animation: fadeIn 1.5s ease-out forwards;
-            overflow: hidden;
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 3em;
+            font-weight: bold;
+        }
+        #message {
+            font-size: 1.5em;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div id="message"></div>
+    <div class="container">
+        <h1>Férias do Ovidio</h1>
+        <div id="message"></div>
+        <div id="countdown"></div>
+    </div>
 
     <script>
-        function atualizaParaFerias() {
-            const dataAtual = new Date();
-            const inicioFerias = new Date(2023, 8, 4, 18, 18); // Lembrando que em JavaScript, os meses começam de 0
-            const fimFerias = new Date(2023, 8, 25, 8, 0); // Lembrando que em JavaScript, os meses começam de 0
-    
-            const diferencaoInicio = inicioFerias - dataAtual;
-            const diferencaoFim = fimFerias - dataAtual;
+        function updateCountdown() {
+            const now = new Date();
+            const startDate = new Date('2024-09-04T00:00:00');
+            const endDate = new Date('2024-09-30T23:59:59');
 
-            let message;
-            if(diferencaoInicio > 0) {
-                let difference = diferencaoInicio;
-                const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hoursDifference = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutesDifference = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const secondsDifference = Math.floor((difference % (1000 * 60)) / 1000);
-                
-                message = `Faltam ${daysDifference} dias, ${hoursDifference} horas, ${minutesDifference} minutos e ${secondsDifference} segundos até as Ferias do Ovidio ^^`;
+            let difference, days, hours, minutes, seconds;
+            let message = '';
+
+            if (now < startDate) {
+                difference = startDate.getTime() - now.getTime();
+                message = 'Contagem regressiva para as férias:';
+            } else if (now >= startDate && now <= endDate) {
+                difference = endDate.getTime() - now.getTime();
+                message = 'Tempo restante de férias:';
+            } else {
+                difference = now.getTime() - endDate.getTime();
+                message = 'Tempo desde o retorno das férias:';
             }
-            
-            if(!message && diferencaoFim > 0){
-                let difference = diferencaoFim;
-                const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hoursDifference = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutesDifference = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const secondsDifference = Math.floor((difference % (1000 * 60)) / 1000);
-                
-                message = `Faltam ${daysDifference} dias, ${hoursDifference} horas, ${minutesDifference} minutos e ${secondsDifference} segundos até a volta do Ovidio ^^`;
-            }
-            if(!message) {
-                message = 'Nada a informar sobre o Ovidio ^^'
-            }
-            
-            // Mostrando a mensagem no div
-            document.getElementById('message').textContent = message;
-            setTimeout(atualizaParaFerias, 100);
+
+            days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('message').innerHTML = message;
         }
-        atualizaParaFerias()
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
