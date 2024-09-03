@@ -32,7 +32,8 @@
 
     <script>
         function gerarComandos() {
-            const logs = document.getElementById('logInput').value;
+            const logs = document.getElementById('logInput').value.replace(
+                /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
             const resultadoDiv = document.getElementById('resultado');
             let comandos = '';
             let bancos = new Set();
