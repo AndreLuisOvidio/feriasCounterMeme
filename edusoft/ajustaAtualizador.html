@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Comandos DELETE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Comandos DELETE</h1>
+    <textarea id="logInput" placeholder="Cole os logs aqui"></textarea>
+    <button onclick="gerarComandos()">Gerar Comandos DELETE</button>
+    <div id="resultado"></div>
+
+    <script>
+        function gerarComandos() {
+            const logs = document.getElementById('logInput').value;
+            const resultadoDiv = document.getElementById('resultado');
+            let comandos = '';
+            let bancos = new Set();
+
+            // Extrair todos os nomes de banco
+            const bancosMatch = logs.match(/(?:\[ERROR\]|\[INFO\]) \d+:\d+:\d+\.\d+ (\w+)/g);
+            if (bancosMatch) {
+                bancosMatch.forEach(match => {
+                    const banco = match.split(' ').pop();
+                    bancos.add(banco);
+                });
+            }
+
+            // Encontrar a versão mais recente
+            const versaoMatch = logs.match(/Detected resolved migration not applied to database: (\d+)/);
+            const versao = versaoMatch ? versaoMatch[1] : null;
+
+            if (versao && bancos.size > 0) {
+                bancos.forEach(banco => {
+                    let useBanco = banco;
+                    if (banco.startsWith('gl_log_')) {
+                        useBanco = banco.substring(7);
+                    }
+                    const comando = `USE BANCO_${useBanco};\nDELETE flyway_history_${banco} where version > '${versao}' and version like '________';\n\n`;
+                    comandos += comando;
+                });
+                resultadoDiv.textContent = comandos.trim();
+            } else {
+                resultadoDiv.textContent = "Não foi possível extrair as informações necessárias dos logs.";
+            }
+        }
+    </script>
+</body>
+</html>
