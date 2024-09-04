@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Requisições da API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin: 0;
+            padding: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .table-container {
+            flex: 1;
+            overflow: auto;
+            padding: 20px;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        .status-success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .status-error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .input-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #apiUrl {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monitoramento de Requisições da API</h1>
+        <div class="input-container">
+            <input type="text" id="apiUrl" placeholder="Insira a URL da API" value="https://apioracle.edusoft.inf.br/apiOracle/actuator/httpexchanges">
+            <button onclick="fetchRequests()">Buscar Dados</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Método</th>
+                        <th>URI</th>
+                        <th>Status</th>
+                        <th>Tempo de Resposta (ms)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const apiUrlInput = document.getElementById('apiUrl');
+
+        // Carrega a última URL usada do localStorage
+        window.onload = function() {
+            const lastUsedUrl = localStorage.getItem('lastUsedApiUrl');
+            if (lastUsedUrl) {
+                apiUrlInput.value = lastUsedUrl;
+                fetchRequests(); // Busca dados automaticamente se houver uma URL salva
+            }
+        };
+
+        function fetchRequests() {
+            const apiUrl = apiUrlInput.value;
+            if (!apiUrl) {
+                alert('Por favor, insira a URL da API');
+                return;
+            }
+
+            // Salva a URL no localStorage
+            localStorage.setItem('lastUsedApiUrl', apiUrl);
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('tableBody');
+                    tableBody.innerHTML = '';
+
+                    data.exchanges
+                        .filter(exchange => !exchange.request.uri.includes('actuator/httpexchanges'))
+                        .forEach(exchange => {
+                            const row = document.createElement('tr');
+                            const statusClass = exchange.response.status < 400 ? 'status-success' : 'status-error';
+                            row.innerHTML = `
+                                <td>${new Date(exchange.timestamp).toLocaleString()}</td>
+                                <td>${exchange.request.method}</td>
+                                <td>${exchange.request.uri}</td>
+                                <td class="${statusClass}">${exchange.response.status}</td>
+                                <td>${(exchange.timeTaken * 1000).toFixed(2)}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+    </script>
+</body>
+</html>
